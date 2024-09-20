@@ -100,13 +100,13 @@ class UserController extends Controller
         // dd($user->isDirty());
 
         $user = UserModel::create([
-            'username' => 'manager11',
-            'nama' => 'Manager11',
+            'username' => 'manager14',
+            'nama' => 'Manager14',
             'password' => Hash::make('12345'),
             'level_id' => 2,
         ]);
 
-        $user->username = 'manager12';
+        $user->username = 'manager25';
 
         $user->save();
 
@@ -115,5 +115,6 @@ class UserController extends Controller
         $user->wasChanged(['username', 'level_id']); //true
         $user->wasChanged('nama'); //false
         $user->wasChanged(['nama', 'username']); //true
+        dd($user->wasChanged(['nama', 'username'])); //true
     }
 }
