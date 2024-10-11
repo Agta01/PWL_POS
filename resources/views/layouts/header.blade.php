@@ -131,5 +131,10 @@
           <i class="fas fa-th-large"></i>
         </a>
       </li>
+      <li class="nav-item">
+        <form action="{{ url('/logout')}}">
+          <button type="submit" class="btn btn-block btn-danger">Logout</button>
+        </form>
+      </li>
     </ul>
   </nav>
