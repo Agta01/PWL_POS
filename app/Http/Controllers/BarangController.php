@@ -51,6 +51,20 @@ class BarangController extends Controller
             ->make(true);
     }
 
+    public function show_ajax(string $id) {
+        $barang = BarangModel::find($id);
+        if ($barang) {
+            // Tampilkan halaman show_ajax dengan data barang
+            return view('barang.show_ajax', ['barang' => $barang]);
+        } else {
+            // Tampilkan pesan kesalahan jika barang tidak ditemukan
+            return response()->json([
+                'status' => false,
+                'message' => 'Data tidak ditemukan'
+            ]);
+        }
+    }
+
     public function create_ajax()
     {
         $kategori = KategoriModel::select('kategori_id', 'kategori_nama')->get();
@@ -89,8 +103,8 @@ class BarangController extends Controller
     public function edit_ajax($id)
     {
         $barang = BarangModel::find($id);
-        $level = LevelModel::select('level_id', 'level_nama')->get();
-        return view('barang.edit_ajax', ['barang' => $barang, 'level' => $level]);
+        $kategori = KategoriModel::select('kategori_id', 'kategori_nama')->get();
+        return view('barang.edit_ajax', ['barang' => $barang, 'kategori' => $kategori]);
     }
 
     public function update_ajax(Request $request, $id)
@@ -137,25 +151,28 @@ class BarangController extends Controller
         return view('barang.confirm_ajax', ['barang' => $barang]);
     }
 
+
     public function delete_ajax(Request $request, $id)
     {
+        // Cek apakah request dari Ajax
         if ($request->ajax() || $request->wantsJson()) {
             $barang = BarangModel::find($id);
             if ($barang) {
                 $barang->delete();
                 return response()->json([
                     'status' => true,
-                    'message' => 'Data berhasil dihapus'
+                    'message' => 'Data barang berhasil dihapus'
                 ]);
             } else {
                 return response()->json([
                     'status' => false,
-                    'message' => 'Data tidak ditemukan'
+                    'message' => 'Data barang tidak ditemukan'
                 ]);
             }
-        }
 
-        return redirect('/');
+        } else {
+            return redirect('/');
+        }
     }
 
     public function import()
