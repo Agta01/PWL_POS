@@ -8,6 +8,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
 
 
 /*
@@ -36,6 +37,8 @@ Route::middleware(['auth'])->group(function() { //artinya semua route di dalam g
     });
     
     Route::get('/', [WelcomeController::class, 'index']);
+    Route::get('/profile', [ProfileController::class, 'index']);
+    Route::post('upload_foto', [ProfileController::class, 'upload_foto'])->name('upload.foto');
     
     Route::middleware(['authorize:ADM,MNG'])->group(function() {
         Route::get('/user', [UserController::class, 'index']);          //menampilkan halaman awal user
