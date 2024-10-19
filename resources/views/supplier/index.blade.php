@@ -10,6 +10,7 @@ data-keyboard="false" data-width="75%" aria-hidden="true"></div>
 		<div class="card-tools">
 			<a href="{{ url('/supplier/export_excel') }}" class="btn btn-sm btn-primary"><i class="fa fa-file-excel"></i> Export Supplier</a>
 			<button onclick="modalAction('{{ url('/supplier/create_ajax') }}')" class="btn btn-sm btn-success mt-1">Tambah Ajax</button>
+			<a href="{{ url('/supplier/export_pdf') }}" class="btn btn-sm btn-warning"><i class="fa fa-file-pdf"></i> Export Supplier PDF</a>
 			<button onclick="modalAction('{{ url('/supplier/import') }}')" class="btn btn-sm btn-info">Import Supplier</button>
 		</div>
 	</div>

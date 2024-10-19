@@ -56,6 +56,7 @@ Route::middleware(['auth'])->group(function() { //artinya semua route di dalam g
         Route::get('/user/import', [UserController::class, 'import']); //ajax form upload data user 
         Route::post('/user/import_ajax', [UserController::class, 'import_ajax']); //ajax import excel data user 
         Route::get('/user/export_excel', [UserController::class, 'export_excel']); // ajax import excel
+        Route::get('/user/export_pdf', [UserController::class, 'export_pdf']); // ajax export pdf
     });
     
     Route::middleware(['authorize:ADM,MNG'])->group(function () {
@@ -77,6 +78,7 @@ Route::middleware(['auth'])->group(function() { //artinya semua route di dalam g
         Route::get('/supplier/import', [SupplierController::class, 'import']); //ajax form upload data supplier 
         Route::post('/supplier/import_ajax', [SupplierController::class, 'import_ajax']); //ajax import excel data supplier
         Route::get('/supplier/export_excel', [SupplierController::class, 'export_excel']); // ajax import excel
+        Route::get('/supplier/export_pdf', [SupplierController::class, 'export_pdf']); // ajax export pdf
     });
     
     Route::middleware(['authorize:ADM,CST,STF,KSR'])->group(function () {
@@ -98,6 +100,7 @@ Route::middleware(['auth'])->group(function() { //artinya semua route di dalam g
         Route::get('/kategori/import', [KategoriController::class, 'import']); //ajax form upload data kategori
         Route::post('/kategori/import_ajax', [KategoriController::class, 'import_ajax']); //ajax import excel data kategori
         Route::get('/kategori/export_excel', [KategoriController::class, 'export_excel']); // ajax import excel
+        Route::get('/kategori/export_pdf', [KategoriController::class, 'export_pdf']); // ajax export pdf
     });
     
     Route::middleware(['authorize:ADM,MNG,STF,KSR'])->group(function () {
@@ -142,6 +145,7 @@ Route::middleware(['auth'])->group(function() { //artinya semua route di dalam g
         Route::get('/level/import', [LevelController::class, 'import']); //ajax form upload data level
         Route::post('/level/import_ajax', [LevelController::class, 'import_ajax']); //ajax import excel data level 
         Route::get('/level/export_excel', [LevelController::class, 'export_excel']); // ajax import excel
+        Route::get('/level/export_pdf', [LevelController::class, 'export_pdf']); // ajax export pdf
     });
 });
 
