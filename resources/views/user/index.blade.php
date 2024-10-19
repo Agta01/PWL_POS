@@ -2,10 +2,11 @@
 @section('content')
 <div class="card card-outline card-primary">
     <div class="card-header">
-        <h3 class="card-title">{{ $page->title }}</h3>
+        <h3 class="card-title">Daftar User</h3>
         <div class="card-tools">
             <a class="btn btn-sm btn-primary mt-1" href="{{ url('user/create') }}">Tambah</a>
-            <button onclick="modalAction( '{{ url('user/create_ajax') }}')" class="btn btn-sm btn-success mt-1">Tambah Ajax</button>
+            <button onclick="modalAction('{{ url('user/create_ajax') }}')" class="btn btn-sm btn-success mt-1">Tambah Ajax</button>
+            <button onclick="modalAction('{{ url('/user/import') }}')" class="btn btn-sm btn-info ">Import User</button> 
         </div>
     </div>
 
@@ -21,7 +22,7 @@
                 <div class="form-group row">
                     <label class="col-1 control-label col-form-label">Filter:</label>
                     <div class="col-3">
-                        <select class="form-control" id="level_id" name="level_id" required>
+                        <select class="form-control" id="filter_user" name="filter_user" required>
                             <option value="">- Semua -</option>
                             @foreach ($level as $item)
                                 <option value="{{ $item->level_id }}">{{ $item->level_nama }}</option>
@@ -35,7 +36,7 @@
     <table class="table table-bordered table-striped table-hover table-sm" id="table_user">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>No</th>
                     <th>Username</th>
                     <th>Nama</th>
                     <th>Level Pengguna</th>
@@ -62,6 +63,7 @@
     var dataUser;
     $(document).ready(function() {
         dataUser = $('#table_user').DataTable({
+            processing: true,
             // serverSide: true, jika ingin menggunakan server side processing
             serverSide: true,
             ajax: {
@@ -69,7 +71,7 @@
                 "dataType": "json",
                 "type": "POST",
                 "data": function (d) {
-                    d.level_id =$('#level_id').val();
+                    d.level_id =$('#filter_user').val();
                 }
             },
             columns: [
@@ -106,8 +108,17 @@
             ]
         });
 
-        $('#level_id').on('change', function() {
-            dataUser.ajax.reload();
+        // $('#level_id').on('change', function() {
+        //     dataUser.ajax.reload();
+        // });
+
+        $('#table_user_filter input').unbind().bind().on('keyup', function(e){ 
+            if(e.keyCode == 13){ // enter key 
+            dataUser.search(this.value).draw(); 
+        } 
+        }); 
+        $('.level_id').change(function(){ 
+            dataUser.draw(); 
         });
     });
 </script>

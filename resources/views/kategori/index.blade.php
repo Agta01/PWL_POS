@@ -6,6 +6,7 @@ data-keyboard="false" data-width="75%" aria-hidden="true"></div>
 		<h3 class="card-title">{{ $page->title }}</h3>
 		<div class="card-tools">
 			<a class="btn btn-sm btn-primary mt-1" href="{{ url('kategori/create') }}">Tambah</a>
+			<button onclick="modalAction('{{ url('/kategori/import') }}')" class="btn btn-sm btn-info">Import Kategori</button>
 			<button onclick="modalAction('{{ url('/kategori/create_ajax') }}')" class="btn btn-sm btn-success mt-1">Tambah Ajax</button>
 		</div>
 	</div>
@@ -21,7 +22,7 @@ data-keyboard="false" data-width="75%" aria-hidden="true"></div>
 		<table class="table table-bordered table-striped table-hover table-sm" id="table_kategori">
 			<thead>
 				<tr>
-					<th>ID</th>
+					<th>No</th>
 					<th>Kode</th>
 					<th>Nama</th>
 					<th>Aksi</th>
@@ -42,6 +43,7 @@ function modalAction(url = '') {
 
 	$(document).ready(function() {
 		 dataKategori = $('#table_kategori').DataTable({
+			processing: true,
 			// serverSide: true, jika ingin menggunakan server side processing
 			serverSide: true,
 			ajax: {

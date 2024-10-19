@@ -10,6 +10,7 @@ data-keyboard="false" data-width="75%" aria-hidden="true"></div>
 		<div class="card-tools">
 			<a class="btn btn-sm btn-primary mt-1" href="{{ url('supplier/create') }}">Tambah</a>
 			<button onclick="modalAction('{{ url('/supplier/create_ajax') }}')" class="btn btn-sm btn-success mt-1">Tambah Ajax</button>
+			<button onclick="modalAction('{{ url('/supplier/import') }}')" class="btn btn-sm btn-info">Import Supplier</button>
 		</div>
 	</div>
 	<div class="card-body">
@@ -24,7 +25,7 @@ data-keyboard="false" data-width="75%" aria-hidden="true"></div>
 		<table class="table table-bordered table-striped table-hover table-sm" id="table_supplier">
 			<thead>
 				<tr>
-					<th>ID</th>
+					<th>No</th>
 					<th>Supplier Kode</th>
 					<th>Supplier Nama</th>
 					<th>Supplier Alamat</th>
@@ -43,6 +44,7 @@ data-keyboard="false" data-width="75%" aria-hidden="true"></div>
         var dataSupplier;
 	$(document).ready(function() {
 		 dataSupplier = $('#table_supplier').DataTable({
+			processing: true,
 			// serverSide: true, jika ingin menggunakan server side processing
 			serverSide: true,
 			ajax: {
