@@ -23,7 +23,7 @@
                 <div class="form-group row">
                     <label class="col-1 control-label col-form-label">Filter:</label>
                     <div class="col-3">
-                        <select class="form-control" id="filter_user" name="filter_user" required>
+                        <select class="form-control filter_user" id="filter_user" name="filter_user" required>
                             <option value="">- Semua -</option>
                             @foreach ($level as $item)
                                 <option value="{{ $item->level_id }}">{{ $item->level_nama }}</option>
@@ -72,7 +72,7 @@
                 "dataType": "json",
                 "type": "POST",
                 "data": function (d) {
-                    d.level_id =$('#filter_user').val();
+                    d.level_id =$('.filter_user').val();
                 }
             },
             columns: [
@@ -109,16 +109,12 @@
             ]
         });
 
-        // $('#level_id').on('change', function() {
-        //     dataUser.ajax.reload();
-        // });
-
         $('#table_user_filter input').unbind().bind().on('keyup', function(e){ 
             if(e.keyCode == 13){ // enter key 
             dataUser.search(this.value).draw(); 
         } 
         }); 
-        $('.level_id').change(function(){ 
+        $('.filter_user').change(function(){ 
             dataUser.draw(); 
         });
     });
