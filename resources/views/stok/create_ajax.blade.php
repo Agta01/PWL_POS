@@ -1,26 +1,36 @@
-<form action="{{ url('/penjualan/ajax') }}" method="POST" id="form-tambah">
+<form action="{{ url('/stok/ajax') }}" method="POST" id="form-tambah">
     @csrf
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Penjualan</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Stok Barang</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label>Kode Penjualan</label>
-                    <input value="" type="text" name="penjualan_kode" id="penjualan_kode" class="form-control" required>
-                    <small id="error-penjualan_kode" class="error-text form-text text-danger"></small>
+                    <label>Nama Supplier</label>
+                    <select name="supplier_id" id="supplier_id" class="form-control" required>
+                        <option value="">- Pilih Supplier -</option>
+                        @foreach($supplier as $s)
+                            <option value="{{ $s->supplier_id }}">{{ $s->supplier_nama }}</option>
+                        @endforeach
+                    </select>
+                    <small id="error-supplier_id" class="error-text form-text text-danger"></small>
                 </div>
                 <div class="form-group">
-                    <label>Nama Customer</label>
-                    <input value="" type="text" name="pembeli" id="pembeli" class="form-control" required>
-                    <small id="error-pembeli" class="error-text form-text text-danger"></small>
+                    <label>Nama Barang</label>
+                    <select name="barang_id" id="barang_id" class="form-control" required>
+                        <option value="">- Pilih Barang -</option>
+                        @foreach($barang as $b)
+                            <option value="{{ $b->barang_id }}">{{ $b->barang_nama }}</option>
+                        @endforeach
+                    </select>
+                    <small id="error-barang_id" class="error-text form-text text-danger"></small>
                 </div>
                 <div class="form-group">
-                    <label>PIC</label>
+                    <label>Penanggung Jawab</label>
                     <select name="user_id" id="user_id" class="form-control" required>
                         <option value="">- Pilih Penanggung Jawab -</option>
                         @foreach($user as $u)
@@ -30,9 +40,14 @@
                     <small id="error-user_id" class="error-text form-text text-danger"></small>
                 </div>
                 <div class="form-group">
-                    <label>Tanggal Penjualan</label>
-                    <input value="" type="datetime-local" name="penjualan_ tanggal" id="penjualan_ tanggal" class="form-control" required>
-                    <small id="error-penjualan_ tanggal" class="error-text form-text text-danger"></small>
+                    <label>Tanggal Terima</label>
+                    <input value="" type="datetime-local" name="stok_tanggal" id="stok_tanggal" class="form-control" required>
+                    <small id="error-stok_tanggal" class="error-text form-text text-danger"></small>
+                </div>
+                <div class="form-group">
+                    <label>Total Stok</label>
+                    <input value="" type="number" name="stok_jumlah" id="stok_jumlah" class="form-control" required>
+                    <small id="error-stok_jumlah" class="error-text form-text text-danger"></small>
                 </div>
             </div>
             <div class="modal-footer">
@@ -42,24 +57,29 @@
         </div>
     </div>
 </form>
-
 <script>
     $(document).ready(function() {
         $("#form-tambah").validate({
             rules: {
-               penjualan_kode: {
+                supplier_id: {
                     required: true,
+                    number: true
                 },
-               pembeli: {
+                barang_id: {
                     required: true,
+                    number:true
                 },
                 user_id: {
                     required: true,
                     number: true
                 },
-                // "penjualan_tanggal": {
-                //     required: true,
-                // }
+                stok_tanggal: {
+                    required: true,
+                },
+                stok_jumlah: {
+                    required: true,
+                    number: true
+                }
             },
             submitHandler: function(form) {
                 $.ajax({

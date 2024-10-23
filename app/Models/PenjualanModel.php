@@ -8,14 +8,9 @@ class PenjualanModel extends Model
     use HasFactory;
     protected $table = 't_penjualan';
     protected $primaryKey = 'penjualan_id';
-    protected $fillable = ['penjualan_id', 'penjualan_kode', 'penjualan _tanggal', 'pembeli'];
-    
-    public function m_user(): BelongsTo {
-        return $this->belongsTo(UserModel :: class, 'user_id', 'user_id');
-    }
+    protected $fillable = ['user_id', 'pembeli', 'penjualan_kode', 'penjualan _tanggal', 'created_at', 'updated_at'];
 
-    public function detailPenjualan()
-    {
-        return $this->hasOne(PenjualanDetailModel::class, 'penjualan_id', 'penjualan_id');
+    public function user() : BelongsTo {
+        return $this->belongsTo(UserModel::class, 'user_id', 'user_id');
     }
 }

@@ -1,4 +1,4 @@
-@empty($penjualan)ategori
+@empty($penjualan)
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -22,7 +22,7 @@
         <div id="modal-master" class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Hapus Data penjualan</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Hapus Data Penjualan</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                 </div>
@@ -33,7 +33,7 @@
                     </div>
                     <table class="table table-sm table-bordered table-striped">
                         <tr>
-                            <th class="text-right col-3">penjualan penjualan :</th>
+                            <th class="text-right col-3">penjualan :</th>
                             <td class="col-9">{{ $penjualan->penjualan->penjualan_nama }}</td>
                         </tr>
                         <tr>
