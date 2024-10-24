@@ -10,29 +10,29 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label>Kode Penjualan</label>
-                    <input value="" type="text" name="penjualan_kode" id="penjualan_kode" class="form-control" required>
-                    <small id="error-penjualan_kode" class="error-text form-text text-danger"></small>
-                </div>
-                <div class="form-group">
-                    <label>Nama Customer</label>
-                    <input value="" type="text" name="pembeli" id="pembeli" class="form-control" required>
-                    <small id="error-pembeli" class="error-text form-text text-danger"></small>
-                </div>
-                <div class="form-group">
-                    <label>PIC</label>
+                    <label>Penanggung Jawab</label>
                     <select name="user_id" id="user_id" class="form-control" required>
-                        <option value="">- Pilih Penanggung Jawab -</option>
-                        @foreach($user as $u)
-                            <option value="{{ $u->user_id }}">{{ $u->nama }}</option>
+                        <option value="">- Pilih PJ -</option>
+                        @foreach($user as $l)
+                            <option value="{{ $l->user_id }}">{{ $l->nama }}</option>
                         @endforeach
                     </select>
                     <small id="error-user_id" class="error-text form-text text-danger"></small>
                 </div>
                 <div class="form-group">
+                    <label>Pembeli</label>
+                    <input value="" type="text" name="pembeli" id="pembeli" class="form-control" required>
+                    <small id="error-pembeli" class="error-text form-text text-danger"></small>
+                </div>
+                <div class="form-group">
+                    <label>Kode Penjualan</label>
+                    <input value="" type="text" name="penjualan_kode" id="penjualan_kode" class="form-control" required>
+                    <small id="error-penjualan_kode" class="error-text form-text text-danger"></small>
+                </div>
+                <div class="form-group">
                     <label>Tanggal Penjualan</label>
-                    <input value="" type="datetime-local" name="penjualan_ tanggal" id="penjualan_ tanggal" class="form-control" required>
-                    <small id="error-penjualan_ tanggal" class="error-text form-text text-danger"></small>
+                    <input value="" type="datetime-local" name="penjualan_tanggal" id="penjualan_tanggal" class="form-control" required>
+                    <small id="error-penjualan_tanggal" class="error-text form-text text-danger"></small>
                 </div>
             </div>
             <div class="modal-footer">
@@ -47,19 +47,23 @@
     $(document).ready(function() {
         $("#form-tambah").validate({
             rules: {
-               penjualan_kode: {
-                    required: true,
-                },
-               pembeli: {
-                    required: true,
-                },
                 user_id: {
                     required: true,
                     number: true
                 },
-                // "penjualan_tanggal": {
-                //     required: true,
-                // }
+                pembeli: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 50
+                },
+                penjualan_kode: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 20
+                },
+                penjualan_tanggal: {
+                    required: true,
+                }
             },
             submitHandler: function(form) {
                 $.ajax({
@@ -74,7 +78,7 @@
                                 title: 'Berhasil',
                                 text: response.message
                             });
-                            dataStok.ajax.reload();
+                            dataPenjualan.ajax.reload();
                         } else {
                             $('.error-text').text('');
                             $.each(response.msgField, function(prefix, val) {

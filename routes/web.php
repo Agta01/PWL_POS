@@ -41,6 +41,8 @@ Route::middleware(['auth'])->group(function() { //artinya semua route di dalam g
     Route::get('/', [WelcomeController::class, 'index']);
     Route::get('/profile', [ProfileController::class, 'index']);
     Route::post('upload_foto', [ProfileController::class, 'upload_foto'])->name('upload.foto');
+    Route::post('/profile/update', [ProfileController::class, 'updateProfile'])->name('update.profile');
+
     
     Route::middleware(['authorize:ADM,MNG'])->group(function() {
         Route::get('/user', [UserController::class, 'index']);          //menampilkan halaman awal user

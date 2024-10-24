@@ -1,3 +1,12 @@
+<style>
+.sidebar .user-panel .image img {
+    width: 50px; /* Adjust the width */
+    height: 50px; /* Adjust the height */
+    object-fit: cover;
+}
+</style>
+
+
 <div class="sidebar">
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">

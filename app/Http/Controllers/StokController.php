@@ -237,6 +237,7 @@ class StokController extends Controller
         }
         return redirect('/stok');
     }
+    
     public function export_excel()
     {
         // Ambil data barang yang akan diexport

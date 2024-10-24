@@ -93,17 +93,29 @@
                   
                   <h3 class="profile-username text-center">{{ auth()->user()->nama}}</h3>
                   <p class="text-muted text-center"> {{auth()->user()->level->level_nama}} </p>
-                  <ul class="list-group list-group-unbordered mb-3">
-                    <li class="list-group-item">
-                      <b>Username</b> <a class="float-right" style="pointer-events: none; color:black">{{ auth()->user()->username}}</a>
-                    </li>
-                    <li class="list-group-item">
-                        <b>Nama</b> <a class="float-right" style="pointer-events: none; color:black">{{ auth()->user()->nama}}</a>
-                    </li>
-                    <li class="list-group-item">
-                        <b>Tingkat Level</b> <a class="float-right" style="pointer-events: none; color:black">{{ auth()->user()->level->level_nama}}</a>
-                    </li>
-                  </ul>
+                  <div class=" mt-2">
+                    <form action="{{ route('update.profile') }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <label for="nama" class="text-left">Nama</label>
+                            <input type="text" id="nama" name="nama" class="form-control" value="{{ auth()->user()->nama }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="username" class="text-left">Username</label>
+                            <input type="text" id="username" name="username" class="form-control" value="{{ auth()->user()->username }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="text-left">Password</label>
+                            <input type="password" id="password" name="password" class="form-control" placeholder="Kosongi bila tidak diganti">
+                        </div>
+                        <div class="form-group">
+                            <label for="password_confirmation">Konfirmasi Password</label>
+                            <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" placeholder="Konfirmasi password">
+                        </div>
+                        <button type="submit" class="btn btn-success btn-block">Perbarui Data Diri</button>
+                        <br>
+                    </form>
+                    </div>
             
                   <a href="{{ url('/')}}" class="btn btn-success btn-block"><b>Kembali</b></a> <!-- Changed to btn-success for green -->
                 </div>

@@ -5,10 +5,10 @@
         <div class="card-header">
             <h3 class="card-title">{{ $page->title }}</h3>
             <div class="card-tools">
-                <button onclick="modalAction('{{ url('/penjualan/import') }}')" class="btn btn-info">Import Penjualan</button> 
-                <a href="{{ url('/penjualan/export_excel') }}" class="btn btn-primary"><i class="fa fa-file-excel"></i>  Export Penjualan (XLSX)</a>
-                <a href="{{ url('/penjualan/export_pdf') }}" class="btn btn-danger"><i class="fa fa-file-pdf"></i> Export Penjualan (PDF)</a> 
-                <button onclick="modalAction('{{ url('/penjualan/create_ajax') }}')" class="btn btn-success">Tambah Data</button> 
+                <button onclick="modalAction('{{ url('/penjualan/import') }}')" class="btn btn-info"><i class="bi bi-file-earmark-excel"></i>  Import XLSX</button>
+                <a href="{{ url('/penjualan/export_excel') }}" class="btn btn-primary"><i class="bi bi-file-earmark-excel"></i>  Export XLSX</a>
+                <a href="{{ url('/penjualan/export_pdf') }}" class="btn btn-warning"><i class="bi bi-file-earmark-pdf"></i>  Export PDF</a>
+                <button onclick="modalAction('{{ url('/penjualan/create_ajax') }}')" class="btn btn-success"><i class="bi bi-cart-plus"></i>  Tambah Data</button>
             </div>
         </div>
         <div class="card-body">
@@ -18,30 +18,30 @@
             @if (session('error'))
             <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
-            {{-- <div class="row">
+            <div class="row">
                 <div class="col-md-12">
                     <div class="form-group row">
                         <label class="col-1 control-label col-form-label">Filter:</label>
                         <div class="col-3">
-                            <select name="supplier_id" id="supplier_id" class="form-control" required>
+                            <select name="user_id" id="user_id" class="form-control" required>
                                 <option value="">- Semua -</option>
-                                @foreach ($supplier as $item)
-                                    <option value="{{ $item->supplier_id }}">{{ $item->supplier_nama }}</option>
+                                @foreach ($user as $item)
+                                    <option value="{{ $item->user_id }}">{{ $item->nama }}</option>
                                 @endforeach
                             </select>
-                            <small class="form-text text-muted">Filter</small>
+                            <small class="form-text text-muted">Penanggung Jawab</small>
                         </div>
                     </div>
                 </div>
-            </div> --}}
+            </div>
             <table class="table table-border table-striped table-hover table-sm" id="table_penjualan">
                 <thead>
                     <tr>
                         <th>No</th>
+                        <th>Pembeli</th>
                         <th>Kode Penjualan</th>
-                        <th>Nama Customer</th>
-                        <th>PIC</th>
                         <th>Tanggal Penjualan</th>
+                        <th>Penanggung Jawab</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -72,8 +72,6 @@
                     "dataType": "json",
                     "type": "POST",
                     "data": function (d){
-                        d.supplier_id = $('#supplier_id').val();
-                        d.barang_id = $('#barang_id').val();
                         d.user_id = $('#user_id').val();
                     }
                 },
@@ -85,26 +83,25 @@
                         orderable: false,
                         searchable: false
                     },{
-                        data: "penjualan_kode",
+                        data: "pembeli",
                         className: "",
-                        orderable: false,
+                        orderable: true,
                         searchable: true
                     },{
-                        data: "pembeli",
+                        data: "penjualan_kode",
                         className: "",
                         orderable:true,
                         searchable: true
                     },{
-                        // mengambil data level dari hasil ORM berelasi
+                        data: "penjualan_tanggal",
+                        className: "",
+                        orderable:true,
+                        searchable: true
+                    },{
                         data: "user.nama",
                         className: "",
                         orderable: false,
-                        searchable: true
-                    },{
-                        data: "penjualan _tanggal",
-                        className: "",
-                        orderable:true,
-                        searchable: true
+                        searchable: false
                     },{
                         data: "aksi",
                         className: "",
@@ -113,7 +110,7 @@
                     }
                 ]
             });
-            $('#supplier_id').on('change', function(){
+            $('#user_id').on('change', function(){
                 dataPenjualan.ajax.reload();
             });
         });

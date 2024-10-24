@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable; // implementasi class Authenticatable
 
@@ -11,8 +10,11 @@ class UserModel extends Authenticatable
 {
     use HasFactory;
 
-    protected $table = 'm_user'; // Mendefinisikan nama tabel yang digunakan oleh model ini
-    protected $primaryKey = 'user_id'; // Mendefinisikan primary key dari tabel yang digunakan
+    protected $table = 'm_user'; // Ensure this is the correct table name
+    protected $primaryKey = 'user_id'; // Set the primary key
+    public $incrementing = false; // If user_id is not an auto-incrementing integer
+    protected $keyType = 'string'; // Set to 'string' if user_id is a string; change accordingly
+
     // @var array 
 
     protected $fillable = ['username', 'password', 'nama','level_id', 'created_at', 'updated_at'];
