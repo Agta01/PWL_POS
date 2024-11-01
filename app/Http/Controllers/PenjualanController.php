@@ -97,7 +97,6 @@ class PenjualanController extends Controller
     public function show_ajax(string $id)
     {
         $penjualan = PenjualanModel::find($id);
-        // $penjualan_detail = PenjualanDetailModel::where('penjualan_id', $id)->select('penjualan_id', 'barang_id', 'harga', 'jumlah')->get();
         $detailpenjualan = PenjualanDetailModel::where('penjualan_id', $id)->select('penjualan_id', 'barang_id', 'harga', 'jumlah')->get();
         $total_harga = PenjualanDetailModel::where('penjualan_id', $id)->select(DB::raw('SUM(harga * jumlah) as total_harga'))->first()->total_harga;
 
@@ -107,7 +106,7 @@ class PenjualanController extends Controller
     public function confirm_ajax(string $id)
     {
         $penjualan = PenjualanModel::find($id);
-
+        
         return view('penjualan.confirm_ajax', ['penjualan' => $penjualan]);
     }
 
