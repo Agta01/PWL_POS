@@ -55,3 +55,5 @@ Route::post('user', [UserController::class, 'store']);
 Route::get('user/{user}', [UserController::class, 'show']);
 Route::put('user/{user}', [UserController::class, 'update']);
 Route::delete('user/{user}', [UserController::class, 'destroy']);
+
+Route::post('/register1', App\Http\Controllers\Api\RegisterController::class)->name('register1');
